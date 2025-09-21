@@ -1,5 +1,3 @@
-# crystalbDizzle
-a birthday site for a friend 
 
 # 🎉 Crystal's 42nd Birthday Website
 
@@ -7,10 +5,9 @@ Welcome to Crystal's birthday website! This beautiful, interactive site celebrat
 
 
 
+live up in hurr--->**https://wifiknight45.github.io/crystalbDizzle/**<--yes, right thurr
 
-**https://wifiknight45.github.io/crystalbDizzle/**
-
-## 📁 File Structure
+## 📁 File Structure 
 
 ```
 crystalbDizzle/
