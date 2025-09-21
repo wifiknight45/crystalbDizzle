@@ -4,20 +4,8 @@
 Welcome to Crystal's birthday website! This beautiful, interactive site celebrates Crystal's special day with historical facts, music from her birth year, and a message board for friends and family.
 
 
-
 live up in hurr--->**https://wifiknight45.github.io/crystalbDizzle/**<--yes, right thurr
 
-## 📁 File Structure 
-
-```
-crystalbDizzle/
-├── index.html                 # Main birthday website
-├── assets/                    # Folder for photos and media
-│   └── README.md             # Instructions for adding media
-├── .github/workflows/        # Auto-deployment setup
-│   └── deploy.yml            # GitHub Actions workflow
-└── README.md                 # This file
-```
 
 ## 🎂 Adding More Content
 
