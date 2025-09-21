@@ -64,7 +64,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="white" opacity="0.1"/><circle cx="80" cy="40" r="0.5" fill="white" opacity="0.1"/><circle cx="40" cy="80" r="0.8" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
             opacity: 0.3;
             pointer-events: none;
         }
@@ -192,6 +192,152 @@
             border-radius: 12px;
             font-size: 0.75rem;
             z-index: 10;
+        }
+
+        /* Photo Upload Styles */
+        .photo-upload-section {
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .upload-container {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .upload-container:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .upload-container.drag-over {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.02);
+        }
+
+        .upload-input {
+            display: none;
+        }
+
+        .upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .upload-label:hover {
+            transform: translateY(-2px);
+        }
+
+        .upload-icon {
+            font-size: 2.5rem;
+            opacity: 0.8;
+        }
+
+        .upload-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .upload-hint {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+        }
+
+        .upload-progress {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .upload-status {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Photo Gallery */
+        .uploaded-photos {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .uploaded-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .uploaded-photo:hover {
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        .uploaded-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-remove {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 59, 48, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .uploaded-photo:hover .photo-remove {
+            display: flex;
         }
 
         /* Playlist Styles */
@@ -458,6 +604,19 @@
             margin-top: 0.5rem;
         }
 
+        .message-photo {
+            margin-top: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 200px;
+        }
+
+        .message-photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         /* Birthday Roast */
         .birthday-roast {
             background: var(--accent-gradient);
@@ -536,6 +695,56 @@
             }
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .modal-close:hover {
+            opacity: 0.7;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero {
@@ -571,6 +780,19 @@
             .comparison-grid {
                 grid-template-columns: 1fr;
             }
+
+            .photo-upload-section {
+                max-width: 100%;
+            }
+
+            .photos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            }
+
+            .uploaded-photo {
+                width: 60px;
+                height: 60px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -601,9 +823,41 @@
                         <div class="slideshow-controls" id="slideshowControls"></div>
                     </div>
                 </div>
+
+                <!-- Photo Upload Section -->
+                <div class="photo-upload-section">
+                    <div class="upload-container" id="uploadContainer">
+                        <label for="photoUpload" class="upload-label">
+                            <div class="upload-icon">📸</div>
+                            <div class="upload-text">Add Photos to Crystal's Gallery</div>
+                            <div class="upload-hint">Tap to select or drag & drop photos</div>
+                        </label>
+                        <input 
+                            type="file" 
+                            id="photoUpload" 
+                            class="upload-input" 
+                            accept="image/*" 
+                            multiple 
+                            capture="environment"
+                        >
+                        <div class="upload-progress" id="uploadProgress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="upload-status" id="uploadStatus">Uploading...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="uploaded-photos" id="uploadedPhotos">
+                        <div style="text-align: center; margin-bottom: 1rem; font-weight: 500;">
+                            Recently Added Photos
+                        </div>
+                        <div class="photos-grid" id="photosGrid"></div>
+                    </div>
+                </div>
                 
                 <div class="playlist-section">
-                    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;border-radius:16px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/playlist/1983/pl.u-8aAVVK9CmPR9J1g"></iframe>
+                    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;border-radius:16px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/playlist/crystals-mix/pl.u-NpXmmaJuBKYmBP"></iframe>
                 </div>
             </div>
             
@@ -710,8 +964,12 @@
                             <textarea id="message" placeholder="Share a memory, wish, or photo description..." required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="photoDescription">Photo/Memory Description (optional):</label>
-                            <input type="text" id="photoDescription" placeholder="Describe a photo or special memory...">
+                            <label for="messagePhoto">Add a Photo (optional):</label>
+                            <input type="file" id="messagePhoto" accept="image/*" capture="environment">
+                        </div>
+                        <div class="form-group">
+                            <label for="photoDescription">Photo Description (optional):</label>
+                            <input type="text" id="photoDescription" placeholder="Describe your photo...">
                         </div>
                         <button type="submit" class="btn">🎉 Post Message</button>
                     </form>
@@ -756,11 +1014,20 @@
         </aside>
     </main>
 
+    <!-- Photo Modal -->
+    <div id="photoModal" class="modal">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Full size photo">
+        </div>
+    </div>
+
     <script>
         // Photo slideshow functionality
         let currentSlide = 0;
         let slideInterval;
         const mediaFiles = [];
+        const uploadedPhotos = [];
 
         // Function to get all media files from assets folder
         async function loadMediaFiles() {
@@ -812,12 +1079,21 @@
                     }
                 }
 
+                // Add uploaded photos to slideshow
+                uploadedPhotos.forEach(photo => {
+                    mediaFiles.push({
+                        name: photo.name,
+                        path: photo.dataUrl,
+                        type: 'image'
+                    });
+                });
+
                 if (mediaFiles.length === 0) {
                     document.getElementById('photoSlideshow').innerHTML = `
                         <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; color: #718096;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">📸</div>
                             <div>Crystal's Photos</div>
-                            <small style="margin-top: 0.5rem;">Add images to /assets folder</small>
+                            <small style="margin-top: 0.5rem;">Add images to /assets folder or upload below</small>
                         </div>
                     `;
                     return;
@@ -830,7 +1106,7 @@
                     <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; color: #718096;">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">📸</div>
                         <div>Crystal's Photos</div>
-                        <small style="margin-top: 0.5rem;">Add images to /assets folder</small>
+                        <small style="margin-top: 0.5rem;">Add images to /assets folder or upload below</small>
                     </div>
                 `;
             }
@@ -919,6 +1195,180 @@
             }
         }
 
+        // Photo Upload Functionality
+        function initializePhotoUpload() {
+            const uploadInput = document.getElementById('photoUpload');
+            const uploadContainer = document.getElementById('uploadContainer');
+            const uploadProgress = document.getElementById('uploadProgress');
+            const progressFill = document.getElementById('progressFill');
+            const uploadStatus = document.getElementById('uploadStatus');
+            const uploadedPhotosContainer = document.getElementById('uploadedPhotos');
+            const photosGrid = document.getElementById('photosGrid');
+
+            // File input change handler
+            uploadInput.addEventListener('change', handleFileUpload);
+
+            // Drag and drop handlers
+            uploadContainer.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadContainer.classList.add('drag-over');
+            });
+
+            uploadContainer.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                uploadContainer.classList.remove('drag-over');
+            });
+
+            uploadContainer.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadContainer.classList.remove('drag-over');
+                const files = e.dataTransfer.files;
+                processFiles(files);
+            });
+
+            function handleFileUpload(e) {
+                const files = e.target.files;
+                processFiles(files);
+            }
+
+            function processFiles(files) {
+                if (files.length === 0) return;
+
+                // Show progress
+                uploadProgress.style.display = 'block';
+                
+                let processedCount = 0;
+                const totalFiles = files.length;
+
+                Array.from(files).forEach((file, index) => {
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            const photo = {
+                                id: Date.now() + index,
+                                name: file.name,
+                                dataUrl: e.target.result,
+                                file: file
+                            };
+                            
+                            uploadedPhotos.push(photo);
+                            addPhotoToGrid(photo);
+                            
+                            processedCount++;
+                            const progress = (processedCount / totalFiles) * 100;
+                            progressFill.style.width = progress + '%';
+                            uploadStatus.textContent = `Processing ${processedCount}/${totalFiles} photos...`;
+                            
+                            if (processedCount === totalFiles) {
+                                setTimeout(() => {
+                                    uploadProgress.style.display = 'none';
+                                    uploadStatus.textContent = 'Upload complete!';
+                                    
+                                    // Show uploaded photos section
+                                    if (uploadedPhotos.length > 0) {
+                                        uploadedPhotosContainer.style.display = 'block';
+                                    }
+                                    
+                                    // Refresh slideshow with new photos
+                                    loadMediaFiles();
+                                    
+                                    // Reset input
+                                    uploadInput.value = '';
+                                }, 500);
+                            }
+                        };
+                        
+                        reader.readAsDataURL(file);
+                    } else {
+                        processedCount++;
+                        if (processedCount === totalFiles) {
+                            uploadProgress.style.display = 'none';
+                        }
+                    }
+                });
+            }
+
+            function addPhotoToGrid(photo) {
+                const photoElement = document.createElement('div');
+                photoElement.className = 'uploaded-photo';
+                photoElement.innerHTML = `
+                    <img src="${photo.dataUrl}" alt="${photo.name}">
+                    <button class="photo-remove" onclick="removePhoto(${photo.id})">&times;</button>
+                `;
+                
+                // Add click handler to view full size
+                photoElement.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('photo-remove')) {
+                        showPhotoModal(photo.dataUrl);
+                    }
+                });
+                
+                photosGrid.appendChild(photoElement);
+            }
+        }
+
+        function removePhoto(photoId) {
+            const photoIndex = uploadedPhotos.findIndex(photo => photo.id === photoId);
+            if (photoIndex > -1) {
+                uploadedPhotos.splice(photoIndex, 1);
+                
+                // Remove from grid
+                const photosGrid = document.getElementById('photosGrid');
+                const photoElements = photosGrid.querySelectorAll('.uploaded-photo');
+                photoElements.forEach((element, index) => {
+                    const img = element.querySelector('img');
+                    const photo = uploadedPhotos.find(p => p.dataUrl === img.src);
+                    if (!photo) {
+                        element.remove();
+                    }
+                });
+                
+                // Hide section if no photos
+                if (uploadedPhotos.length === 0) {
+                    document.getElementById('uploadedPhotos').style.display = 'none';
+                }
+                
+                // Refresh slideshow
+                loadMediaFiles();
+            }
+        }
+
+        // Photo Modal Functionality
+        function initializePhotoModal() {
+            const modal = document.getElementById('photoModal');
+            const modalClose = document.getElementById('modalClose');
+            const modalImage = document.getElementById('modalImage');
+
+            modalClose.addEventListener('click', closePhotoModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closePhotoModal();
+                }
+            });
+
+            // Close modal with escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closePhotoModal();
+                }
+            });
+        }
+
+        function showPhotoModal(imageSrc) {
+            const modal = document.getElementById('photoModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageSrc;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePhotoModal() {
+            const modal = document.getElementById('photoModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
         // Message board functionality
         const messages = [];
         
@@ -944,7 +1394,12 @@
                 <article class="message-item">
                     <div class="message-header">${msg.name} ${msg.photo ? '📸' : '💬'}</div>
                     <div>${msg.message}</div>
-                    ${msg.photo ? `<div style="margin-top: 0.5rem; font-style: italic; color: #718096;">📸 ${msg.photo}</div>` : ''}
+                    ${msg.photo ? `
+                        <div class="message-photo" onclick="showPhotoModal('${msg.photo}')">
+                            <img src="${msg.photo}" alt="Message photo">
+                        </div>
+                    ` : ''}
+                    ${msg.photoDescription ? `<div style="margin-top: 0.5rem; font-style: italic; color: #718096;">📸 ${msg.photoDescription}</div>` : ''}
                     <div class="message-times">
                         <div>UTC: ${msg.utc}</div>
                         <div>Local: ${msg.local}</div>
@@ -972,53 +1427,57 @@
             const now = new Date();
             const name = document.getElementById('senderName').value;
             const message = document.getElementById('message').value;
-            const photo = document.getElementById('photoDescription').value;
+            const photoFile = document.getElementById('messagePhoto').files[0];
+            const photoDescription = document.getElementById('photoDescription').value;
             
-            messages.unshift({
-                name: name,
-                message: message,
-                photo: photo,
-                utc: formatUTC(now),
-                local: formatTime(now)
-            });
-            
-            renderMessages();
-            
-            // Reset form
+            if (photoFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    messages.unshift({
+                        name: name,
+                        message: message,
+                        photo: e.target.result,
+                        photoDescription: photoDescription,
+                        utc: formatUTC(now),
+                        local: formatTime(now)
+                    });
+                    
+                    renderMessages();
+                    resetMessageForm();
+                };
+                reader.readAsDataURL(photoFile);
+            } else {
+                messages.unshift({
+                    name: name,
+                    message: message,
+                    photo: null,
+                    photoDescription: photoDescription,
+                    utc: formatUTC(now),
+                    local: formatTime(now)
+                });
+                
+                renderMessages();
+                resetMessageForm();
+            }
+        });
+
+        function resetMessageForm() {
             document.getElementById('senderName').value = '';
             document.getElementById('message').value = '';
+            document.getElementById('messagePhoto').value = '';
             document.getElementById('photoDescription').value = '';
             
             // Scroll to top of messages
             document.getElementById('messagesContainer').scrollTop = 0;
-        });
+        }
         
-        // Initialize
-        updateSampleTimes();
-        setInterval(updateSampleTimes, 1000);
-        
-        // Load media files when page loads
-        window.addEventListener('load', loadMediaFiles);
-        
-        // Add intersection observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections for scroll animations
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('section, aside').forEach(section => {
-                observer.observe(section);
-            });
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSampleTimes();
+            setInterval(updateSampleTimes, 1000);
+            loadMediaFiles();
+            initializePhotoUpload();
+            initializePhotoModal();
         });
     </script>
 </body>
