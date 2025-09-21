@@ -46,7 +46,7 @@ Feel free to edit the HTML to:
 
 Happy 42nd Birthday, Crystal! 🎂
 
-This website celebrates you - an amazing mother to Addison & Rylan, dedicated Fresno County Court Clerk, Paradise survivor, artist, and wonderful friend. Here's to many more years of creativity, laughter, and beautiful memories!
+This website celebrates you - an amazing mother to Addison & Rylan, dedicated Court Clerk, Paradise survivor, artist, and wonderful friend. Here's to many more years of creativity, laughter, and beautiful memories!
 
 ---
 
