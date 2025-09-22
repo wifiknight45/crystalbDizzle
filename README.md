@@ -1,4 +1,8 @@
-
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white)
+![No Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg?style=flat)
+![Apple Music](https://img.shields.io/badge/apple%20music-%23D13584.svg?style=flat&logo=apple-music&logoColor=white)
 # 🎉 Crystal's 42nd Birthday Website
 
 Welcome to Crystal's birthday website! This beautiful, interactive site celebrates Crystal's special day with historical facts, music from her birth year, and a message board for friends and family.
