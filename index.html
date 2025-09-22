@@ -4,7 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy 42nd Birthday Crystal! 🎉</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --warm-gradient: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            --cool-gradient: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            --surface-color: rgba(255, 255, 255, 0.95);
+            --surface-hover: rgba(255, 255, 255, 0.98);
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --border-radius: 16px;
+            --border-radius-lg: 24px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --max-width: 1200px;
+            --section-spacing: 4rem;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,98 +35,101 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--primary-gradient);
+            background-attachment: fixed;
             overflow-x: hidden;
         }
 
-        .floating-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .shape {
-            position: absolute;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
+        /* Header Styles */
         .hero {
-            background: linear-gradient(45deg, #ff6b6b, #ffa500, #ffeb3b, #4ecdc4);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            padding: 3rem 2rem;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             color: white;
             position: relative;
-            overflow: hidden;
+            padding: 2rem;
         }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="white" opacity="0.1"/><circle cx="80" cy="40" r="0.5" fill="white" opacity="0.1"/><circle cx="40" cy="80" r="0.8" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
         }
 
         .hero-subtitle {
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 300;
             margin-bottom: 2rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-details {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        /* Photo Frame Styles */
+        .photo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            animation: fadeInUp 1s ease-out 0.8s both;
         }
 
         .photo-frame {
             width: 300px;
             height: 300px;
-            margin: 2rem auto;
-            border: 10px solid #fff;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 6px solid rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-xl);
             overflow: hidden;
             position: relative;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: #888;
-            text-align: center;
-            transform: rotate(-2deg);
-            transition: transform 0.3s ease;
+            background: #f8f9fa;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .photo-frame:hover {
-            transform: rotate(0deg) scale(1.05);
-        }
-
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.5s ease-in-out;
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
 
         .photo-slideshow {
@@ -134,7 +160,7 @@
 
         .slideshow-controls {
             position: absolute;
-            bottom: 10px;
+            bottom: 12px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -143,242 +169,113 @@
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.6);
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .dot.active {
             background: rgba(255, 255, 255, 1);
+            transform: scale(1.2);
         }
 
         .photo-counter {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 12px;
+            right: 12px;
             background: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
             z-index: 10;
         }
 
-        .container {
-            max-width: 1200px;
+        /* Playlist Styles */
+        .playlist-section {
+            width: 100%;
+            max-width: 660px;
             margin: 0 auto;
-            padding: 2rem;
         }
 
-        .section {
-            background: rgba(255, 255, 255, 0.95);
-            margin: 2rem 0;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        .playlist-section iframe {
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease;
+        }
+
+        .playlist-section iframe:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--section-spacing) 2rem;
+        }
+
+        section {
+            background: var(--surface-color);
+            margin-bottom: 3rem;
+            padding: 3rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
 
-        .section h2 {
-            color: #4a5568;
+        section:hover {
+            background: var(--surface-hover);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        section h2 {
+            font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
             text-align: center;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
+        /* Card Styles */
         .card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--accent-gradient);
             color: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transform: translateY(0);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
         }
 
         .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #fff;
-        }
-
-        .historical-event {
-            background: linear-gradient(135deg, #ff6b6b, #ffa500);
-            margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 10px;
-            border-left: 5px solid #fff;
-        }
-
-        .songs-list {
-            list-style: none;
-        }
-
-        .songs-list li {
-            background: rgba(255,255,255,0.1);
-            margin: 0.5rem 0;
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid #ffa500;
-            transition: transform 0.2s ease;
-        }
-
-        .songs-list li:hover {
-            transform: translateX(10px);
-            background: rgba(255,255,255,0.2);
-        }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 1rem;
-        }
-
-        .year-column {
-            background: linear-gradient(135deg, #4ecdc4, #44a08d);
-            padding: 1.5rem;
-            border-radius: 15px;
-            color: white;
-        }
-
-        .year-column h3 {
+            font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .message-board {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 15px;
-            padding: 2rem;
-        }
-
-        .message-form {
-            background: rgba(255,255,255,0.1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
+            font-weight: 600;
             margin-bottom: 1rem;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            background: rgba(255,255,255,0.9);
-        }
-
-        .form-group textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #ff6b6b, #ffa500);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-
-        .messages-container {
-            max-height: 500px;
-            overflow-y: auto;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 1rem;
-        }
-
-        .message-item {
-            background: rgba(255,255,255,0.9);
-            color: #333;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .message-header {
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #667eea;
-        }
-
-        .message-times {
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 0.5rem;
-        }
-
-        .medicare-joke {
-            background: linear-gradient(135deg, #ff6b6b, #ffa500);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            border-radius: 15px;
-        }
-
-        .medicare-joke a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .medicare-joke a:hover {
-            text-decoration: underline;
-        }
-
+        /* Fun Facts */
         .fun-facts {
-            background: linear-gradient(135deg, #ffa500, #ff6b6b);
+            background: var(--warm-gradient);
             color: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin: 1rem 0;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
         }
 
         .fun-facts ul {
@@ -386,85 +283,340 @@
         }
 
         .fun-facts li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: padding-left 0.3s ease;
+        }
+
+        .fun-facts li:hover {
+            padding-left: 1rem;
         }
 
         .fun-facts li:last-child {
             border-bottom: none;
         }
 
+        /* Songs List */
+        .songs-list {
+            list-style: none;
+        }
+
+        .songs-list li {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .songs-list li:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .year-column {
+            background: var(--cool-gradient);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            color: white;
+        }
+
+        .year-column h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .year-column ul {
+            list-style: none;
+        }
+
+        .year-column li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: padding-left 0.3s ease;
+        }
+
+        .year-column li:hover {
+            padding-left: 1rem;
+        }
+
+        .year-column li:last-child {
+            border-bottom: none;
+        }
+
+        /* Message Board */
+        .message-board {
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+        }
+
+        .message-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-primary);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .messages-container {
+            max-height: 500px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .message-item {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-primary);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .message-item:hover {
+            background: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .message-header {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .message-times {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Birthday Roast */
+        .birthday-roast {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 3rem;
+            margin-top: 3rem;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+        }
+
+        .birthday-roast h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 2rem 0 1rem 0;
+            font-size: 1.8rem;
+        }
+
+        .birthday-roast ul {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .birthday-roast li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .birthday-roast li:last-child {
+            border-bottom: none;
+        }
+
+        .birthday-roast a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .birthday-roast a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* History Link */
+        .history-link {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .history-link a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .history-link a:hover {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .hero {
+                padding: 1rem;
+                min-height: 100vh;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
-            
+
             .hero-subtitle {
                 font-size: 1.2rem;
             }
-            
-            .comparison-grid {
-                grid-template-columns: 1fr;
+
+            main {
+                padding: 2rem 1rem;
             }
-            
-            .container {
-                padding: 1rem;
+
+            section {
+                padding: 2rem 1.5rem;
             }
-            
+
+            section h2 {
+                font-size: 2rem;
+            }
+
             .photo-frame {
                 width: 250px;
                 height: 250px;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 1.5rem 1rem;
+            }
+
+            .photo-frame {
+                width: 200px;
+                height: 200px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="floating-shapes">
-        <div class="shape" style="top: 10%; left: 10%; width: 60px; height: 60px; background: rgba(255,107,107,0.3); border-radius: 50%; animation-delay: 0s;"></div>
-        <div class="shape" style="top: 20%; right: 15%; width: 40px; height: 40px; background: rgba(255,165,0,0.3); border-radius: 50%; animation-delay: 1s;"></div>
-        <div class="shape" style="top: 60%; left: 20%; width: 80px; height: 80px; background: rgba(78,205,196,0.3); border-radius: 50%; animation-delay: 2s;"></div>
-        <div class="shape" style="top: 70%; right: 20%; width: 50px; height: 50px; background: rgba(255,235,59,0.3); border-radius: 50%; animation-delay: 3s;"></div>
-    </div>
-
     <header class="hero">
-        <h1>🎉 Happy 42nd Birthday Crystal! 🎉</h1>
-        <p class="hero-subtitle">Celebrating an amazing woman, mother, and friend!</p>
-        <p style="font-size: 1.2rem; margin-bottom: 1rem;">Born September 21st, 1983 • Mother to Addison & Rylan • Fresno County Court Clerk</p>
-        <p style="font-size: 1rem; opacity: 0.9;">Paradise survivor, artist, creative soul, and the best person to chill with! 💖</p>
-        
-        <div class="photo-frame">
-            <div class="photo-slideshow" id="photoSlideshow">
-                <div class="photo-counter" id="photoCounter">Loading...</div>
-                <div id="slidesContainer"></div>
-                <div class="slideshow-controls" id="slideshowControls"></div>
+        <div class="hero-content">
+            <h1>🎉 Happy 42nd Birthday Crystal! 🎉</h1>
+            <p class="hero-subtitle">Celebrating an amazing woman, mother, and friend!</p>
+            <p class="hero-details">Born September 21st, 1983 • Mother to Addison & Rylan</p>
+            <p class="hero-description">Paradise survivor, artist, creative soul, and the best person to chill with! 💖</p>
+            
+            <div class="photo-container">
+                <div class="photo-frame">
+                    <div class="photo-slideshow" id="photoSlideshow">
+                        <div class="photo-counter" id="photoCounter">Loading...</div>
+                        <div id="slidesContainer"></div>
+                        <div class="slideshow-controls" id="slideshowControls"></div>
+                    </div>
+                </div>
+                
+                <div class="playlist-section">
+                    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;border-radius:16px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/playlist/1983/pl.u-8aAVVK9CmPR9J1g"></iframe>
+                </div>
+            </div>
+            
+            <div class="history-link">
+                <a href="https://www.computerhistory.org/timeline/1983/" target="_blank" rel="noopener noreferrer">
+                    1983 | Timeline of Computer History
+                </a>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <section class="section">
-            <h2>🏛️ History Made on September 21st, 1983</h2>
-            <div class="grid">
-                <div class="historical-event">
-                    <h3>📢 Anti-Marcos Demonstrations in Manila</h3>
-                    <p>Violent demonstrations erupted in Manila against President Ferdinand Marcos, resulting in the tragic death of 11 protesters - part of growing resistance against the authoritarian regime.</p>
-                </div>
-                <div class="historical-event">
-                    <h3>💻 Tech Innovation</h3>
-                    <p>The world was witnessing the early days of personal computing with IBM's PC XT making waves in the technology sector.</p>
-                </div>
-                <div class="historical-event">
-                    <h3>🎬 Entertainment Boom</h3>
-                    <p>Return of the Jedi was dominating box offices as the highest-grossing film of 1983, completing the original Star Wars trilogy.</p>
-                </div>
-                <div class="historical-event">
-                    <h3>🎵 Music Revolution</h3>
-                    <p>Michael Jackson's Thriller album was reshaping the music industry, with MTV changing how we consumed music forever.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
+    <main>
+        <section>
             <h2>🌟 Fascinating September 21st Throughout History</h2>
             <div class="fun-facts">
                 <ul>
@@ -482,8 +634,13 @@
             </div>
         </section>
 
-        <section class="section">
+        <section>
             <h2>🎵 Billboard Hits from September 21st, 1983</h2>
+            <div class="history-link" style="margin-bottom: 2rem;">
+                <a href="https://en.wikipedia.org/wiki/Billboard_Year-End_Hot_100_singles_of_1983" target="_blank" rel="noopener noreferrer">
+                    Billboard Year-End Hot 100 singles of 1983
+                </a>
+            </div>
             <div class="card">
                 <h3>Top Songs Dominating the Charts</h3>
                 <ul class="songs-list">
@@ -498,16 +655,16 @@
                     <li><strong>#9:</strong> "Human Touch" - Rick Springfield</li>
                     <li><strong>#10:</strong> "One Thing Leads to Another" - The Fixx</li>
                 </ul>
-                <p style="margin-top: 1rem; font-style: italic;">Michael Jackson was absolutely dominating 1983 with multiple hits from "Thriller"!</p>
+                <p style="margin-top: 1.5rem; font-style: italic; opacity: 0.9;">Michael Jackson was absolutely dominating 1983 with multiple hits from "Thriller"!</p>
             </div>
         </section>
 
-        <section class="section">
+        <section>
             <h2>🌍 World Then vs. Now: 1983 vs. 2025</h2>
             <div class="comparison-grid">
-                <div class="year-column">
+                <article class="year-column">
                     <h3>🕰️ 1983</h3>
-                    <ul style="list-style: none;">
+                    <ul>
                         <li>📺 No internet, cable TV was revolutionary</li>
                         <li>📞 Cordless phones were cutting-edge</li>
                         <li>🏛️ Ronald Reagan was President</li>
@@ -519,10 +676,10 @@
                         <li>🎬 VHS vs. Betamax was the streaming war</li>
                         <li>🏪 Shopping meant going to actual stores</li>
                     </ul>
-                </div>
-                <div class="year-column">
+                </article>
+                <article class="year-column">
                     <h3>🚀 2025</h3>
-                    <ul style="list-style: none;">
+                    <ul>
                         <li>🌐 Internet in our pockets 24/7</li>
                         <li>📱 Smartphones more powerful than 1983 computers</li>
                         <li>🏛️ Donald Trump returned as President</li>
@@ -534,15 +691,15 @@
                         <li>📺 Netflix, streaming wars everywhere</li>
                         <li>🛒 Everything delivered in hours</li>
                     </ul>
-                </div>
+                </article>
             </div>
         </section>
 
-        <section class="section">
+        <section>
             <h2>💬 Crystal's Birthday Message Board</h2>
             <div class="message-board">
                 <div class="message-form">
-                    <h3 style="margin-bottom: 1rem;">Leave a Birthday Message for Crystal! 🎂</h3>
+                    <h3 style="margin-bottom: 1.5rem;">Leave a Birthday Message for Crystal! 🎂</h3>
                     <form id="messageForm">
                         <div class="form-group">
                             <label for="senderName">Your Name:</label>
@@ -562,27 +719,42 @@
 
                 <h3>Birthday Messages:</h3>
                 <div class="messages-container" id="messagesContainer">
-                    <div class="message-item">
+                    <article class="message-item">
                         <div class="message-header">🎂 Birthday Team</div>
                         <div>Welcome to Crystal's 42nd Birthday celebration! Share your favorite memories, photos, and birthday wishes here. Let's make this special! 💖</div>
                         <div class="message-times">
                             <div>UTC: <span id="sampleUTC"></span></div>
                             <div>Local: <span id="sampleLocal"></span></div>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <div class="medicare-joke">
-            <h2>🎂 Special Birthday Gift for Crystal</h2>
-            <p>Now that you're 42, it's never too early to start thinking about the future! 😄</p>
-            <a href="https://www.medicare.gov/plan-compare/" target="_blank">
-                Explore Medicare Plans (Just Kidding! 😂 You've Got Years!)
-            </a>
-            <p style="margin-top: 1rem; font-size: 0.9rem;">But seriously, here's to many more healthy, happy years ahead! 💪</p>
-        </div>
-    </div>
+        <aside class="birthday-roast">
+            <p>
+                🎉 Another year older, another year wiser… 
+                or at least another year closer to qualifying for all these <em>exclusive perks</em> 
+                I've carefully curated just for you. Don't worry, nothing says "celebration" quite like 
+                luxury resorts, premium sound systems, and a few surprise investments in your future. 😉
+            </p>
+
+            <h3>Your Birthday Bonus Package 🎁</h3>
+            <ul>
+                <li><a href="https://www.mobility-aids.com/" target="_blank" rel="noopener noreferrer">Next-Gen Sports Car 🚗</a></li>
+                <li><a href="https://www.medicare.gov/plan-compare/" target="_blank" rel="noopener noreferrer">Elite Membership Program 🎟️</a></li>
+                <li><a href="https://www.amazon.com/Personal-Pill-Organizers/b?node=23700437011" target="_blank" rel="noopener noreferrer">Limited-Edition Jewelry Box 💍</a></li>
+                <li><a href="https://www.soundly.com/" target="_blank" rel="noopener noreferrer">Premium Surround Sound 🎧</a></li>
+                <li><a href="https://www.after55.com/search/ca/fresno" target="_blank" rel="noopener noreferrer">Luxury Vacation Villas 🏖️</a></li>
+                <li><a href="https://www.buriallink.com/" target="_blank" rel="noopener noreferrer">Future Real Estate Investment 🏡</a></li>
+            </ul>
+
+            <p>
+                Enjoy your perks while they last—because nothing says "forever young" like 
+                a pill organizer and a timeshare in the afterlife. Cheers to you! 🥂
+            </p>
+        </aside>
+    </main>
 
     <script>
         // Photo slideshow functionality
@@ -593,13 +765,9 @@
         // Function to get all media files from assets folder
         async function loadMediaFiles() {
             try {
-                // List of common image and video extensions
                 const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.bmp'];
                 const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi'];
-                
-                // Since we can't directly list directory contents in GitHub Pages,
-                // we'll check for known files and dynamically discover others
-                const knownFiles = ['crystal.jpeg']; // Start with known files
+                const knownFiles = ['crystal.jpeg'];
                 
                 // Try to load known files first
                 for (const file of knownFiles) {
@@ -617,7 +785,7 @@
                     }
                 }
 
-                // Try to discover additional files by testing common patterns
+                // Try to discover additional files
                 const commonNames = [
                     'image1', 'image2', 'image3', 'photo1', 'photo2', 'photo3',
                     'pic1', 'pic2', 'pic3', 'crystal1', 'crystal2', 'crystal3',
@@ -645,11 +813,11 @@
                 }
 
                 if (mediaFiles.length === 0) {
-                    // Fallback: show placeholder
                     document.getElementById('photoSlideshow').innerHTML = `
-                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column;">
-                            <div>📸 Crystal's Photos 📸</div>
-                            <small style="margin-top: 10px;">Add images to /assets folder</small>
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; color: #718096;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📸</div>
+                            <div>Crystal's Photos</div>
+                            <small style="margin-top: 0.5rem;">Add images to /assets folder</small>
                         </div>
                     `;
                     return;
@@ -658,11 +826,11 @@
                 initializeSlideshow();
             } catch (error) {
                 console.error('Error loading media files:', error);
-                // Show fallback content
                 document.getElementById('photoSlideshow').innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column;">
-                        <div>📸 Crystal's Photos 📸</div>
-                        <small style="margin-top: 10px;">Add images to /assets folder</small>
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; color: #718096;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📸</div>
+                        <div>Crystal's Photos</div>
+                        <small style="margin-top: 0.5rem;">Add images to /assets folder</small>
                     </div>
                 `;
             }
@@ -673,11 +841,9 @@
             const controlsContainer = document.getElementById('slideshowControls');
             const counterElement = document.getElementById('photoCounter');
 
-            // Clear existing content
             slidesContainer.innerHTML = '';
             controlsContainer.innerHTML = '';
 
-            // Create slides
             mediaFiles.forEach((file, index) => {
                 const slide = document.createElement('div');
                 slide.className = `slide ${index === 0 ? 'active' : ''}`;
@@ -690,21 +856,17 @@
                 
                 slidesContainer.appendChild(slide);
 
-                // Create dot control
                 const dot = document.createElement('div');
                 dot.className = `dot ${index === 0 ? 'active' : ''}`;
                 dot.onclick = () => goToSlide(index);
                 controlsContainer.appendChild(dot);
             });
 
-            // Update counter
             updateCounter();
 
-            // Start auto-slide if more than one image
             if (mediaFiles.length > 1) {
                 startSlideshow();
                 
-                // Pause on hover
                 const slideshow = document.getElementById('photoSlideshow');
                 slideshow.addEventListener('mouseenter', stopSlideshow);
                 slideshow.addEventListener('mouseleave', startSlideshow);
@@ -747,7 +909,7 @@
 
         function startSlideshow() {
             if (mediaFiles.length > 1) {
-                slideInterval = setInterval(nextSlide, 3000); // Change every 3 seconds
+                slideInterval = setInterval(nextSlide, 4000);
             }
         }
 
@@ -770,33 +932,35 @@
         
         function updateSampleTimes() {
             const now = new Date();
-            document.getElementById('sampleUTC').textContent = formatUTC(now);
-            document.getElementById('sampleLocal').textContent = formatTime(now);
+            const utcElement = document.getElementById('sampleUTC');
+            const localElement = document.getElementById('sampleLocal');
+            if (utcElement) utcElement.textContent = formatUTC(now);
+            if (localElement) localElement.textContent = formatTime(now);
         }
         
         function renderMessages() {
             const container = document.getElementById('messagesContainer');
             const messageElements = messages.map(msg => `
-                <div class="message-item">
+                <article class="message-item">
                     <div class="message-header">${msg.name} ${msg.photo ? '📸' : '💬'}</div>
                     <div>${msg.message}</div>
-                    ${msg.photo ? `<div style="margin-top: 0.5rem; font-style: italic; color: #666;">📸 ${msg.photo}</div>` : ''}
+                    ${msg.photo ? `<div style="margin-top: 0.5rem; font-style: italic; color: #718096;">📸 ${msg.photo}</div>` : ''}
                     <div class="message-times">
                         <div>UTC: ${msg.utc}</div>
                         <div>Local: ${msg.local}</div>
                     </div>
-                </div>
+                </article>
             `).join('');
             
             container.innerHTML = `
-                <div class="message-item">
+                <article class="message-item">
                     <div class="message-header">🎂 Birthday Team</div>
                     <div>Welcome to Crystal's 42nd Birthday celebration! Share your favorite memories, photos, and birthday wishes here. Let's make this special! 💖</div>
                     <div class="message-times">
                         <div>UTC: <span id="sampleUTC"></span></div>
                         <div>Local: <span id="sampleLocal"></span></div>
                     </div>
-                </div>
+                </article>
                 ${messageElements}
             `;
             updateSampleTimes();
@@ -836,46 +1000,26 @@
         // Load media files when page loads
         window.addEventListener('load', loadMediaFiles);
         
-        // Add some sparkle effects
-        function createSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.style.cssText = `
-                position: fixed;
-                pointer-events: none;
-                z-index: 9999;
-                width: 4px;
-                height: 4px;
-                background: white;
-                border-radius: 50%;
-                top: ${Math.random() * 100}vh;
-                left: ${Math.random() * 100}vw;
-                animation: sparkle 3s linear forwards;
-            `;
-            
-            const keyframes = `
-                @keyframes sparkle {
-                    0% { opacity: 0; transform: scale(0) rotate(0deg); }
-                    50% { opacity: 1; transform: scale(1) rotate(180deg); }
-                    100% { opacity: 0; transform: scale(0) rotate(360deg); }
+        // Add intersection observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
                 }
-            `;
-            
-            if (!document.querySelector('#sparkle-styles')) {
-                const style = document.createElement('style');
-                style.id = 'sparkle-styles';
-                style.textContent = keyframes;
-                document.head.appendChild(style);
-            }
-            
-            document.body.appendChild(sparkle);
-            
-            setTimeout(() => {
-                document.body.removeChild(sparkle);
-            }, 3000);
-        }
-        
-        // Create sparkles every 2 seconds
-        setInterval(createSparkle, 2000);
+            });
+        }, observerOptions);
+
+        // Observe all sections for scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('section, aside').forEach(section => {
+                observer.observe(section);
+            });
+        });
     </script>
 </body>
 </html>
